@@ -22,9 +22,9 @@ do
 	# Only interested in directories
 	[ -d "${f}" ] || continue
 
-	echo -en "\033[0;35m"
-	echo "${f}"
-	echo -en "\033[0m"
+	echo -en "\033[0;35m" # Purple text
+	echo -n "${f} "
+	echo -en "\033[0m" # back to white text
 
 	# Check if directory is a git repository
 	if [ -d "$f/.git" ]
@@ -37,7 +37,7 @@ do
 		then
 			mod=1
 			echo -en "\033[0;31m"
-			echo "Modified files"
+			echo "(Modified files)"
 			echo -en "\033[0m"
 		fi
 
@@ -46,19 +46,19 @@ do
 		then
 			mod=1
 			echo -en "\033[0;31m"
-			echo "Untracked files"
+			echo -n "(Untracked files)"
 			echo -en "\033[0m"
 		fi
 
 		# Check if everything is peachy keen
 		if [ $mod -eq 0 ]
 		then
-			echo "Nothing to commit"
+			echo -n "(Nothing to commit)"
 		fi
 
 		cd ../
 	else
-		echo "Not a git repository"
+		echo "(Not a git repository)"
 	fi
 
 	echo
